@@ -1,10 +1,11 @@
 import React from "react";
-// const About = () => {
-//     let message = "Hello World";
-//     return (
-//         <h1>Hello About Page - {message}</h1>
-//     );
-// }
+
+const About = () => {
+    let message = "Hello World";
+    return (
+        <h1>Hello About Page - {message}</h1>
+    );
+}
     
 // export default About;
 
@@ -15,12 +16,12 @@ import React from "react";
 
 export default About; */
 
-class About extends React.Component {
-    render() {
-        return (
-            <h1>Hello, I am class Component!</h1>
-        )
-    }
-}
+// class About extends React.Component {
+//     render() {
+//         return (
+//             <h1>Hello, I am class Component!</h1>
+//         )
+//     }
+// }
 
 export default About;
