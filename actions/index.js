@@ -1,64 +1,46 @@
-const MOVIE_DATA = [
-    {
-      id: '1',
-      name: 'The Shawshank Redemption',
-      releaseYear: 1994,
-      description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-      longDesc: "Lorem Ipsum - это текст-'рыба', часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной 'рыбой' для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
-      rating: 4.8,
-      genre: 'drama',
-      image: 'https://m.media-amazon.com/images/M/MV5BNjQ2NDA3MDcxMF5BMl5BanBnXkFtZTgwMjE5NTU0NzE@._V1_CR0,60,640,360_AL_UX477_CR0,0,477,268_AL_.jpg',
-      cover: 'https://images.unsplash.com/photo-1547269098-bff6017b750c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
-    },
-    {
-      id: '2',
-      name: 'The Dark Knight',
-      releaseYear: 2008,
-      description: 'When the menace known as The Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham. The Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice.',
-      longDesc: 'Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст.." Многие программы электронной вёрстки и редакторы HTML используют Lorem Ipsum в качестве текста по умолчанию, так что поиск по ключевым словам "lorem ipsum" сразу показывает, как много веб-страниц всё ещё дожидаются своего настоящего рождения. За прошедшие годы текст Lorem Ipsum получил много версий. Некоторые версии появились по ошибке, некоторые - намеренно (например, юмористические варианты).',
-      rating: 4.7,
-      genre: 'action, crime, drama',
-      image: 'https://img.cinemablend.com/filter:scale/quill/c/3/8/0/f/4/c380f4f12cfeec19f0c40c6f57db188f2f98cca8.jpg?mw=600',
-      cover: 'https://images.unsplash.com/photo-1497124401559-3e75ec2ed794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
-    },
-    {
-      id: '3',
-      name: 'Lord of the Rings',
-      releaseYear: 2004,
-      description: 'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.',
-      longDesc: 'Есть много вариантов Lorem Ipsum, но большинство из них имеет не всегда приемлемые модификации, например, юмористические вставки или слова, которые даже отдалённо не напоминают латынь. Если вам нужен Lorem Ipsum для серьёзного проекта, вы наверняка не хотите какой-нибудь шутки, скрытой в середине абзаца. Также все другие известные генераторы Lorem Ipsum используют один и тот же текст, который они просто повторяют, пока не достигнут нужный объём. Это делает предлагаемый здесь генератор единственным настоящим Lorem Ipsum генератором. Он использует словарь из более чем 200 латинских слов, а также набор моделей предложений. В результате сгенерированный Lorem Ipsum выглядит правдоподобно, не имеет повторяющихся абзацей или "невозможных" слов.',
-      rating: 4.9,
-      genre: 'adventure, drama, fantasy',
-      image: 'https://img.cinemablend.com/filter:scale/quill/0/f/5/2/a/6/0f52a6843a25c1a5c1f9a0c00548cad9e1d912e2.jpg?mw=600',
-      cover: 'https://images.unsplash.com/photo-1547438688-bc005987deed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
-    }
-  ];
+import axios from 'axios';
 
- export const getMovies = () => {
-  return new Promise((resolve, reject) => {
+const BASE_URL = 'http://localhost:3000';
+
+export const getMovies = () => {
+  /* return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(MOVIE_DATA);
       // reject('Cannot fetch data!');
     }, 50);
-  });
+  }); */
+
+  return axios.get(`${BASE_URL}/api/v1/movies`).then(res => res.data);
 }
 
 export const getMovieById = (id) => {
-  return new Promise((resolve, reject) => {
+
+  return axios.post(`${BASE_URL}/api/v1/movies/${id}`).then(res => res.data);
+
+  /* return new Promise((resolve, reject) => {
     const movieIndex = MOVIE_DATA.findIndex(m => m.id === id);
     const movie = MOVIE_DATA[movieIndex];
     setTimeout(() => { resolve(movie), 50} );
-  });
+  }); */
 }
 
 export const createMovie = (movie) => {
-  return new Promise((resolve, reject) => {
+  /* return new Promise((resolve, reject) => {
+    movie.id = Math.random().toString(36).substr(2, 7);
     MOVIE_DATA.push(movie);
     setTimeout(() => {
       resolve(MOVIE_DATA);
     }, 50)
-  });
+  }); */
+  movie.id = Math.random().toString(36).substr(2, 7);
+
+  return axios.post(`${BASE_URL}/api/v1/movies`, movie).then(res => res.data);
 }
+
+export const deleteMovie = (id) => {
+  return axios.delete(`${BASE_URL}/api/v1/movies/${id}`).then(res => res.data);
+}
+
 
 const CATEGORY_DATA = [
   {

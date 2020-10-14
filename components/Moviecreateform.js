@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const MovieCreatehtmlForm = ({ handleFormSubmit }) => {
+const MovieCreateForm = ({ handleFormSubmit, initialData }) => {
 
-    const [form, setForm] = useState({
-        name: 'Some Name',
-        desription: 'Some Description'
-    });
+    const defaultData = {
+        name: '',
+        description: '',
+        rating: '',
+        image: '',
+        cover: '',
+        longDesc: ''
+    };
+
+    const formData = initialData ? {...initialData} : defaultData;
+
+    const [form, setForm] = useState(formData);
 
     const handleChange = (event) => {
         const target = event.target;
@@ -57,7 +65,7 @@ const MovieCreatehtmlForm = ({ handleFormSubmit }) => {
                 <label htmlFor="description">Description</label>
                 <input
                     onChange={handleChange}
-                    defaultValue={form.desription}
+                    defaultValue={form.description}
                     name="description" 
                     type="text" 
                     className="form-control" 
@@ -135,4 +143,4 @@ const MovieCreatehtmlForm = ({ handleFormSubmit }) => {
     );
 }
   
-export default MovieCreatehtmlForm;
+export default MovieCreateForm;
