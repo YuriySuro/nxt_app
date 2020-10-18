@@ -38,7 +38,7 @@ app.prepare().then(() => {
                 res.status(422).send(err);
             }
             return res.json('Movie has successful added!');
-        })
+        });
     });
 
 
@@ -56,20 +56,25 @@ app.prepare().then(() => {
                 res.status(422).send(err);
             }
             return res.json('Movie has successful deleted!');
-        }) 
+        }); 
     });
 
-    // server.get('/faq', (req, res) => {
-    //     res.send(
-    //         `<html>
-    //             <head></head>
-    //             <body><h1>Hello World!</h1></body>
-    //         </html>`
-    //     );
-    // })
+    server.patch('/api/v1/movies/:id', (req, res) => {
+        const { id } = req.params;
+        const movie = req.body;
 
-    server.get('*', (req, res) => {
-        return handle(req, res);
+        const movieIndex = movieData.findIndex(m => m.id === id);
+        movieData[movieIndex] = movie;
+
+        const pathToFile = path.join(__dirname, filePath);
+        const stringifyData = JSON.stringify(movieData, null, 2);
+        
+        fs.writeFile(pathToFile, stringifyData, (err) => {
+            if(err) {
+                res.status(422).send(err);
+            }
+            return res.json(movie);
+        }); 
     });
 
     const PORT = process.env.PORT || 3000;

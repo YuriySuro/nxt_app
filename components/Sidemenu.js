@@ -3,7 +3,7 @@ import MovieCreateForm from './Moviecreateform';
 import { createMovie } from '../actions';
 import { useRouter } from 'next/router';
 
-const Sidemenu = ({ appName, categories }) => {
+const Sidemenu = ({ appName, categories, changeCategory, activeCategory }) => {
 
     let modal = null;
     const router = useRouter();
@@ -11,7 +11,7 @@ const Sidemenu = ({ appName, categories }) => {
     const handleCreateMovie = (movie) => {
         createMovie(movie).then((movies) => {
             modal.closeModal();
-            router.push('/');
+            router.push('/', '/');
         });
     }
 
@@ -22,8 +22,9 @@ const Sidemenu = ({ appName, categories }) => {
                 { categories.map((category) => (
                     <a 
                         href="#" 
-                        className="list-group-item"
+                        className={`list-group-item ${activeCategory === category.name ? 'active' : ''}`}
                         key={category.id}
+                        onClick={() => changeCategory(category.name)}
                     >
                         {category.name}
                     </a>

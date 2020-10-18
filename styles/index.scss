@@ -1,0 +1,42 @@
+body {
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+
+    footer.footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .base-page {
+        padding-top: 100px;
+        padding-bottom: 200px;
+
+        p.movie-genre {
+            font-size: 17px;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+    
+        .card-title {
+            margin-bottom: 0px;
+        }
+    }
+    
+    .navbar {
+        min-height: 80px;
+    
+        > li > a {
+            font-size: 19px;
+        }
+    }
+    
+    .navbar-brand {
+        font-size: 30px;
+        font-weight: bold;
+    }
+}
+
+
+
